@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaan Arslan — Web Tasarımı & Front-End</title>
+<meta name="description" content="Kaan Arslan — web tasarımcısı ve front-end geliştirici. Kullanıcı odaklı, hızlı ve özenli web siteleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  Tek dosyalık portfolio. İçerik: aşağıdaki HTML bölümleri.
+  Renkler ve yazı tipleri: :root bloğu. Projeler: "PROJELER" bölümü.
+-->
+<style>
+  :root {
+    --bg: #f7f7fb;
+    --yuzey: #ffffff;
+    --ink: #17182b;
+    --soluk: #5d6172;
+    --vurgu: #5b4fe9;
+    --vurgu-2: #8f7bff;
+    --vurgu-yumusak: rgba(91, 79, 233, 0.09);
+    --cizgi: #e7e8f0;
+    --nav-bg: rgba(247, 247, 251, 0.82);
+    --golge: 0 14px 40px rgba(23, 24, 43, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101018;
+      --yuzey: #181824;
+      --ink: #ececf4;
+      --soluk: #9a9db0;
+      --vurgu: #8b7bff;
+      --vurgu-2: #a78bfa;
+      --vurgu-yumusak: rgba(139, 123, 255, 0.12);
+      --cizgi: #262636;
+      --nav-bg: rgba(16, 16, 24, 0.82);
+      --golge: 0 14px 40px rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-padding-top: 84px; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .logo, .btn {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    letter-spacing: -0.015em;
+  }
+
+  .kap { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .mono {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+
+  /* ── Üst menü ─────────────────────────────────────────── */
+  .ust {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--cizgi);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 64px;
+  }
+  .logo {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--vurgu); }
+  .nav-linkler { display: flex; gap: 1.75rem; }
+  .nav-linkler a {
+    color: var(--soluk);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .nav-linkler a:hover { color: var(--ink); }
+
+  /* ── Butonlar ─────────────────────────────────────────── */
+  .btn {
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.35rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn-dolu {
+    background: linear-gradient(135deg, var(--vurgu), var(--vurgu-2));
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(91, 79, 233, 0.3);
+  }
+  .btn-dolu:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(91, 79, 233, 0.38); }
+  .btn-cizgi {
+    color: var(--ink);
+    border: 1.5px solid var(--cizgi);
+    background: var(--yuzey);
+  }
+  .btn-cizgi:hover { border-color: var(--vurgu); color: var(--vurgu); }
+  .btn-kucuk { padding: 0.5rem 1rem; font-size: 0.875rem; }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero { position: relative; overflow: hidden; }
+  .hero-ic {
+    position: relative;
+    z-index: 2;
+    padding-top: 7rem;
+    padding-bottom: 7.5rem;
+    max-width: 640px;
+  }
+  .eyebrow {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.14em;
+    color: var(--vurgu);
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 5.5vw, 3.9rem);
+    font-weight: 700;
+    line-height: 1.12;
+  }
+  .isaret {
+    background: linear-gradient(120deg, var(--vurgu-yumusak) 0%, var(--vurgu-yumusak) 100%) no-repeat;
+    background-size: 100% 42%;
+    background-position: 0 82%;
+    color: var(--vurgu);
+  }
+  .hero-desc {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    color: var(--soluk);
+    max-width: 46ch;
+  }
+  .hero-btnler { margin-top: 2.25rem; display: flex; gap: 0.9rem; flex-wrap: wrap; }
+
+  /* Takımyıldız: hero imza öğesi */
+  .graf {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 520px;
+    max-width: 55vw;
+    z-index: 1;
+    color: var(--vurgu);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .graf line { stroke: currentColor; stroke-opacity: 0.28; stroke-width: 1.2; }
+  .graf circle { fill: var(--bg); stroke: currentColor; stroke-width: 2; }
+  .graf .dolu { fill: currentColor; stroke: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .graf .s1 { animation: yuzer 7s ease-in-out infinite alternate; }
+    .graf .s2 { animation: yuzer 9s ease-in-out infinite alternate-reverse; }
+    .graf .s3 { animation: yuzer 11s ease-in-out infinite alternate; }
+    @keyframes yuzer { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+  }
+  @media (max-width: 860px) {
+    .graf { opacity: 0.16; right: -120px; }
+  }
+
+  /* ── Bölümler ─────────────────────────────────────────── */
+  .bolum { padding: 5.5rem 0; }
+  .bolum-alt { background: var(--yuzey); border-top: 1px solid var(--cizgi); border-bottom: 1px solid var(--cizgi); }
+  .bolum-etiket {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: var(--vurgu);
+    margin-bottom: 0.75rem;
+  }
+  h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 700; margin-bottom: 2.25rem; }
+
+  /* ── Proje kartları ───────────────────────────────────── */
+  .kartlar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .kart {
+    background: var(--yuzey);
+    border: 1px solid var(--cizgi);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .kart:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--golge);
+    border-color: var(--vurgu);
+  }
+  .kart-gorsel {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .g1 { background: linear-gradient(135deg, #5b4fe9, #8f7bff); }
+  .g2 { background: linear-gradient(135deg, #4356d6, #5b8bf5); }
+  .g3 { background: linear-gradient(135deg, #7a3fd4, #b06ae8); }
+  /* Demo kartları: her işletmenin kendi marka tonları */
+  .g-kucukev  { background: linear-gradient(135deg, #2e3a5c, #a63a24); }
+  .g-dolunay  { background: linear-gradient(135deg, #101828, #3d5a80); }
+  .g-belpiatto{ background: linear-gradient(135deg, #b23b2e, #e0a34c); }
+  .kart-gorsel svg { width: 84px; height: 84px; }
+  .kart-icerik { padding: 1.4rem 1.5rem 1.6rem; }
+  .kart h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.45rem; }
+  .kart h3 a { color: var(--ink); text-decoration: none; }
+  .kart h3 a:hover { color: var(--vurgu); }
+  .kart p { font-size: 0.9375rem; color: var(--soluk); }
+  .rozetler { margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .rozet {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 0.75rem;
+    color: var(--vurgu);
+    background: var(--vurgu-yumusak);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  /* ── Hakkımda ─────────────────────────────────────────── */
+  .hakkimda-izgara {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  .hakkimda-izgara h2 { margin-bottom: 1.25rem; }
+  .hakkimda-izgara p + p { margin-top: 1rem; }
+  .hakkimda-izgara p { color: var(--soluk); }
+  .arac-kutusu {
+    background: var(--yuzey);
+    border: 1px solid var(--cizgi);
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+  .arac-kutusu h3 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+  .araclar { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+  .arac {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--yuzey);
+    border: 1px solid var(--cizgi);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+  }
+  @media (max-width: 760px) {
+    .hakkimda-izgara { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  /* ── İletişim ─────────────────────────────────────────── */
+  .iletisim-ic { text-align: center; max-width: 620px; }
+  .iletisim-ic h2 { margin-bottom: 1rem; }
+  .iletisim-ic > p { color: var(--soluk); margin-bottom: 2rem; }
+  .btn-buyuk { font-size: 1.05rem; padding: 0.9rem 1.8rem; }
+  .sosyal { margin-top: 1.75rem; font-size: 0.9375rem; }
+  .sosyal a { color: var(--soluk); text-decoration: none; }
+  .sosyal a:hover { color: var(--vurgu); }
+  .sosyal .mono { font-size: 0.875rem; }
+
+  footer {
+    border-top: 1px solid var(--cizgi);
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--soluk);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--vurgu);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ── Kaydırma ile belirme ─────────────────────────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    .belir {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .belir.gorunur { opacity: 1; transform: none; }
+    .hero-ic > * {
+      animation: giris 0.6s ease both;
+    }
+    .hero-ic > *:nth-child(2) { animation-delay: 0.08s; }
+    .hero-ic > *:nth-child(3) { animation-delay: 0.16s; }
+    .hero-ic > *:nth-child(4) { animation-delay: 0.24s; }
+    @keyframes giris {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+
+  @media (max-width: 560px) {
+    .nav-linkler { gap: 1rem; }
+    .nav-linkler a { font-size: 0.85rem; }
+    .nav .btn { display: none; }
+    .hero-ic { padding-top: 4.5rem; padding-bottom: 5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="ust">
+  <nav class="nav kap" aria-label="Ana gezinme">
+    <a class="logo" href="#top">kaan<span>.</span>arslan</a>
+    <div class="nav-linkler">
+      <a href="#projeler">Projeler</a>
+      <a href="#demolar">Demolar</a>
+      <a href="#hakkimda">Hakkımda</a>
+      <a href="#iletisim">İletişim</a>
+    </div>
+    <a class="btn btn-dolu btn-kucuk" href="mailto:1kaan2arslan3@gmail.com">İletişime geç</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <svg class="graf" viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="90"  y1="110" x2="230" y2="70"/>
+      <line x1="230" y1="70"  x2="380" y2="140"/>
+      <line x1="90"  y1="110" x2="180" y2="250"/>
+      <line x1="180" y1="250" x2="380" y2="140"/>
+      <line x1="180" y1="250" x2="120" y2="390"/>
+      <line x1="180" y1="250" x2="330" y2="330"/>
+      <line x1="330" y1="330" x2="380" y2="140"/>
+      <line x1="330" y1="330" x2="450" y2="420"/>
+      <line x1="120" y1="390" x2="330" y2="330"/>
+      <g class="s1">
+        <circle cx="90"  cy="110" r="7"/>
+        <circle class="dolu" cx="380" cy="140" r="9"/>
+      </g>
+      <g class="s2">
+        <circle cx="230" cy="70"  r="5"/>
+        <circle class="dolu" cx="180" cy="250" r="11"/>
+        <circle cx="450" cy="420" r="6"/>
+      </g>
+      <g class="s3">
+        <circle cx="120" cy="390" r="7"/>
+        <circle class="dolu" cx="330" cy="330" r="7"/>
+      </g>
+    </svg>
+    <div class="kap hero-ic">
+      <p class="eyebrow">KAAN ARSLAN — WEB TASARIMI &amp; FRONT-END</p>
+      <h1>Fikirleri <span class="isaret">çalışan arayüzlere</span> dönüştürüyorum.</h1>
+      <p class="hero-desc">
+        Kullanıcı odaklı, hızlı ve özenli web siteleri tasarlayıp geliştiriyorum.
+        Az ama iyi: her ayrıntının bir nedeni var.
+      </p>
+      <div class="hero-btnler">
+        <a class="btn btn-dolu" href="#projeler">Projelerimi gör</a>
+        <a class="btn btn-cizgi" href="#iletisim">İletişim</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projeler ── -->
+  <section id="projeler" class="bolum">
+    <div class="kap">
+      <p class="bolum-etiket">PROJELER</p>
+      <h2 class="belir">Seçilmiş işler</h2>
+      <div class="kartlar">
+
+        <!-- Örnek projeler — kendi projelerinle değiştir -->
+        <article class="kart belir">
+          <div class="kart-gorsel g1" aria-hidden="true">
+            <svg viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3">
+              <line x1="18" y1="24" x2="46" y2="14"/><line x1="46" y1="14" x2="66" y2="38"/>
+              <line x1="18" y1="24" x2="34" y2="54"/><line x1="34" y1="54" x2="66" y2="38"/>
+              <line x1="34" y1="54" x2="52" y2="72"/>
+              <circle cx="18" cy="24" r="6" fill="currentColor" stroke="none"/>
+              <circle cx="46" cy="14" r="5"/><circle cx="66" cy="38" r="7" fill="currentColor" stroke="none"/>
+              <circle cx="34" cy="54" r="6"/><circle cx="52" cy="72" r="5"/>
+            </svg>
+          </div>
+          <div class="kart-icerik">
+            <h3><a href="https://github.com/1kaan2arslan3-cpu" rel="noopener">Bilgi Grafiği Deneyleri</a></h3>
+            <p>Not ve kod tabanlarını sorgulanabilir bilgi grafiklerine dönüştürme
+               üzerine çalışmalar; dosyalar arası ilişkileri görünür kılmak.</p>
+            <div class="rozetler">
+              <span class="rozet">python</span><span class="rozet">graf</span><span class="rozet">nlp</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="kart belir">
+          <div class="kart-gorsel g2" aria-hidden="true">
+            <svg viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3">
+              <rect x="10" y="16" width="64" height="52" rx="6"/>
+              <line x1="10" y1="30" x2="74" y2="30"/>
+              <circle cx="19" cy="23" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="27" cy="23" r="2" fill="currentColor" stroke="none"/>
+              <line x1="20" y1="42" x2="52" y2="42"/><line x1="20" y1="52" x2="64" y2="52"/>
+            </svg>
+          </div>
+          <div class="kart-icerik">
+            <h3><a href="https://github.com/1kaan2arslan3-cpu" rel="noopener">Arayüz Çalışmaları</a></h3>
+            <p>Küçük, hızlı ve responsive arayüz denemeleri — tek dosyalık
+               sayfalardan çok sayfalı sitelere.</p>
+            <div class="rozetler">
+              <span class="rozet">html</span><span class="rozet">css</span><span class="rozet">javascript</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="kart belir">
+          <div class="kart-gorsel g3" aria-hidden="true">
+            <svg viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3">
+              <rect x="12" y="14" width="60" height="18" rx="4"/>
+              <rect x="12" y="40" width="28" height="30" rx="4"/>
+              <rect x="48" y="40" width="24" height="14" rx="4"/>
+              <rect x="48" y="60" width="24" height="10" rx="4"/>
+            </svg>
+          </div>
+          <div class="kart-icerik">
+            <h3><a href="https://github.com/1kaan2arslan3-cpu" rel="noopener">Landing Sayfaları</a></h3>
+            <p>Markalar için tek sayfalık, hızlı yüklenen ve derdini net anlatan
+               tanıtım siteleri.</p>
+            <div class="rozetler">
+              <span class="rozet">tasarım</span><span class="rozet">html</span><span class="rozet">css</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Demo Tasarımlar ── -->
+  <section id="demolar" class="bolum bolum-alt">
+    <div class="kap">
+      <p class="bolum-etiket">DEMO TASARIMLAR</p>
+      <h2 class="belir">Yerel işletmeler için demo siteler</h2>
+      <div class="kartlar">
+
+        <article class="kart belir">
+          <div class="kart-gorsel g-kucukev" aria-hidden="true">
+            <svg viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3">
+              <line x1="12" y1="14" x2="72" y2="14"/>
+              <rect x="24" y="18" width="36" height="46" rx="2"/>
+              <path d="M42 30 L52 41 L42 52 L32 41 Z"/>
+              <line x1="26" y1="70" x2="58" y2="70" stroke-dasharray="2 5" stroke-width="6"/>
+            </svg>
+          </div>
+          <div class="kart-icerik">
+            <h3><a href="https://1kaan2arslan3-cpu.github.io/kucukev-hali-yikama/" rel="noopener">Küçük Ev Halı Yıkama</a></h3>
+            <p>Bağcılar'daki halı yıkama firması için tek dosyalık tanıtım sitesi —
+               kilim motifleri, canlı "şimdi açık" rozeti, açık/koyu tema.</p>
+            <div class="rozetler">
+              <span class="rozet">tanıtım sitesi</span><span class="rozet">html+css</span><span class="rozet">canlı</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="kart belir">
+          <div class="kart-gorsel g-dolunay" aria-hidden="true">
+            <svg viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3">
+              <circle cx="42" cy="42" r="24"/>
+              <path d="M50 22 A24 24 0 0 0 50 62 A30 30 0 0 1 50 22 Z" fill="currentColor" stroke="none"/>
+              <circle cx="34" cy="34" r="3" fill="currentColor" stroke="none"/>
+              <circle cx="30" cy="48" r="2" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="kart-icerik">
+            <h3><a href="https://1kaan2arslan3-cpu.github.io/" rel="noopener">Dolunay Böcek İlaçlama</a></h3>
+            <p>İstanbul geneline hizmet veren haşere kontrol firması için 7/24 acil
+               çağrı odaklı tanıtım sitesi.</p>
+            <div class="rozetler">
+              <span class="rozet">react</span><span class="rozet">vite</span><span class="rozet">canlı</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="kart belir">
+          <div class="kart-gorsel g-belpiatto" aria-hidden="true">
+            <svg viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3">
+              <path d="M42 16 L70 64 A56 56 0 0 1 14 64 Z"/>
+              <path d="M24 58 A44 44 0 0 0 60 58" fill="none"/>
+              <circle cx="42" cy="40" r="3" fill="currentColor" stroke="none"/>
+              <circle cx="34" cy="52" r="3" fill="currentColor" stroke="none"/>
+              <circle cx="50" cy="52" r="3" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="kart-icerik">
+            <h3><a href="https://claude.ai/code/artifact/c06457d9-2621-43cd-a935-1fcd9778a095" rel="noopener">Bel Piatto Pizza</a></h3>
+            <p>Moda, Kadıköy'deki pizzacı için sıcak, menü odaklı tanıtım tasarımı.</p>
+            <div class="rozetler">
+              <span class="rozet">tanıtım sitesi</span><span class="rozet">tek dosya</span><span class="rozet">önizleme</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Hakkımda ── -->
+  <section id="hakkimda" class="bolum">
+    <div class="kap hakkimda-izgara">
+      <div class="belir">
+        <p class="bolum-etiket">HAKKIMDA</p>
+        <h2>Merhaba, ben Kaan</h2>
+        <p>
+          Web tasarımcısıyım ve front-end geliştiriyorum. Bir konuyu anlamanın en
+          iyi yolunun onun için bir şey inşa etmek olduğuna inanıyorum — bu yüzden
+          sürekli küçük araçlar, sayfalar ve deneyler yapıyorum.
+        </p>
+        <p>
+          Bilgiyi birbirine bağlamak — notları, kodu, fikirleri — yaptığım her işin
+          ortak paydası. Sade ama düşünülmüş arayüzler kurmayı seviyorum.
+        </p>
+        <!-- Bu metni kendi hikâyenle geliştirebilirsin. -->
+      </div>
+      <aside class="arac-kutusu belir">
+        <h3>Araç kutum</h3>
+        <div class="araclar">
+          <span class="arac">HTML</span>
+          <span class="arac">CSS</span>
+          <span class="arac">JavaScript</span>
+          <span class="arac">Python</span>
+          <span class="arac">Git</span>
+          <span class="arac">Responsive tasarım</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ── İletişim ── -->
+  <section id="iletisim" class="bolum">
+    <div class="kap iletisim-ic">
+      <p class="bolum-etiket">İLETİŞİM</p>
+      <h2 class="belir">Birlikte bir şey yapalım</h2>
+      <p class="belir">Bir proje fikrin mi var, ya da sadece merhaba mı demek istiyorsun? Bir e-posta uzağındayım.</p>
+      <a class="btn btn-dolu btn-buyuk belir" href="mailto:1kaan2arslan3@gmail.com">1kaan2arslan3@gmail.com</a>
+      <p class="sosyal belir">
+        <a class="mono" href="https://github.com/1kaan2arslan3-cpu" rel="noopener">github.com/1kaan2arslan3-cpu →</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Kaan Arslan · bu site tek bir HTML dosyası — bağımlılık yok, izleyici yok.
+</footer>
+
+<script>
+  // Kaydırınca bölümleri yumuşakça göster (hareket azaltma tercihine saygılı)
+  if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    const izleyici = new IntersectionObserver((girdiler) => {
+      for (const g of girdiler) {
+        if (g.isIntersecting) {
+          g.target.classList.add("gorunur");
+          izleyici.unobserve(g.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".belir").forEach((el) => izleyici.observe(el));
+  } else {
+    document.querySelectorAll(".belir").forEach((el) => el.classList.add("gorunur"));
+  }
+</script>
+
+</body>
+</html>
